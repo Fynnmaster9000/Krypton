@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krypton Client | DonutSMP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #050505;
+    color: white;
+    min-height: 100vh;
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(5,5,5,0.7);
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 28px;
+    font-weight: 800;
+    text-decoration: none;
+    color: white;
+}
+
+.logo-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #ffd000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nav-links {
+    display: flex;
+    gap: 50px;
+}
+
+.nav-links a {
+    color: #b5b5b5;
+    text-decoration: none;
+    transition: .25s;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #ffd000;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.glow {
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    border-radius: 50%;
+    background: #ffd000;
+    filter: blur(180px);
+    opacity: .15;
+    animation: pulse 5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    50% {
+        transform: scale(1.15);
+        opacity: .22;
+    }
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    padding: 20px;
+}
+
+h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 1.05;
+    font-weight: 900;
+    margin-bottom: 25px;
+}
+
+.highlight {
+    color: #ffd000;
+    font-style: italic;
+    text-shadow: 0 0 35px rgba(255,208,0,.5);
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    color: #9a9a9a;
+    margin-bottom: 50px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 520px;
+    max-width: 90%;
+    height: 80px;
+    border-radius: 999px;
+    background: #ffd000;
+    color: black;
+    text-decoration: none;
+    font-size: 1.35rem;
+    font-weight: 800;
+    transition: .25s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(255,208,0,.3);
+}
+
+/* Grid Background */
+.grid {
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Features Section */
+.features {
+    padding: 100px 60px;
+    background: #050505;
+    position: relative;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 60px;
+}
+
+.section-title span {
+    color: #ffd000;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: rgba(20,20,20,0.8);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 24px;
+    padding: 32px;
+    transition: .3s;
+}
+
+.feature-card:hover {
+    border-color: rgba(255,208,0,0.3);
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #ffd000, #ffaa00);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 24px;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: #9a9a9a;
+    line-height: 1.5;
+}
+
+/* Reviews Section */
+.reviews {
+    padding: 100px 60px;
+    background: #050505;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.review-card {
+    background: rgba(20,20,20,0.7);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 25px;
+}
+
+.stars {
+    color: #ffd000;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    letter-spacing: 3px;
+}
+
+.review-text {
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.review-author {
+    color: #6b6b6b;
+    font-size: 0.8rem;
+}
+
+/* Footer */
+footer {
+    padding: 50px 60px 30px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    text-align: center;
+}
+
+.footer-text {
+    color: #4a4a4a;
+    font-size: 0.8rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    nav {
+        padding: 20px 25px;
+    }
+    
+    .features, .reviews {
+        padding: 60px 25px;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .nav-links {
+        display: none;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="grid"></div>
+
+<nav>
+    <a href="#" class="logo">
+        <div class="logo-icon">
+            <img src="https://files.catbox.moe/dg07iy.webp">
+        </div>
+        Krypton Client
+    </a>
+    <div class="nav-links">
+        <!-- Navigation links removed as requested -->
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="glow"></div>
+    <div class="content">
+        <h1>
+            The most <span class="highlight">powerful</span><br>
+            client for DonutSMP
+        </h1>
+        <p class="subtitle">
+            80+ modules. Undetected. Built for Fabric 1.21.11.
+        </p>
+<a href="download" class="btn">
+    Get Started →
+</a>
+    </div>
+</section>
+
+<section id="features" class="features">
+    <h2 class="section-title">Why choose <span>Krypton</span>?</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>High Performance</h3>
+            <p>No FPS drops. Runs light so you can actually play.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔄</div>
+            <h3>Stable & Updated</h3>
+            <p>Updated frequently. Always compatible with the latest patches.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3>Undetected</h3>
+            <p>Advanced bypasses. Stay ahead of anti-cheat systems.</p>
+        </div>
+    </div>
+</section>
+
+<section id="reviews" class="reviews">
+    <h2 class="section-title">What our <span>users</span> say</h2>
+    <div class="reviews-grid">
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p class="review-text">"W 100% SUGGEST. Best client I've ever used."</p>
+            <p class="review-author">— Krypton+ Cracked user</p>
+        </div>
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p class="review-text">"Found 19 bases/farms in one week. Insane."</p>
+            <p class="review-author">— Krypton+ Cracked user</p>
+        </div>
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p class="review-text">"This is the best client. Period."</p>
+            <p class="review-author">— Krypton+ Cracked user</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p class="footer-text">© 2025 Krypton Client. Not affiliated with Mojang AB. Fabric 1.21.11.</p>
+</footer>
+
+</body>
+</html>
